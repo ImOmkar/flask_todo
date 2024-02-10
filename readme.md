@@ -1,3 +1,5 @@
+![alt text](https://github.com/ImOmkar/flask_todo/todo.png "flask_todo")
+
 1. create virutal environment'
 2. activate virtual environment
 3. go to root directory - flask_todo.
@@ -6,7 +8,7 @@
 <!-- skip, if you already know. -->
 1. install sqlite or sqlite viewer extension in vscode to see the db tables
 2. delete and re create db if you want.
-    2.1 run python command in terminal inside root directory - (flask_todo) not the project directory (flask_todo) and enter below lines
+    2.1. run python command in terminal inside root directory - (flask_todo) not the project directory (flask_todo) and enter below lines
     ```
     from flask_todo import app, db
     app.app_context().push() #this will create emtpy instance folder in root
