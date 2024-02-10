@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block navbar %}
+<div class="flex justify-center gap-2 p-2 mb-2 text-sm text-center text-white rounded-b-3xl drop-shadow-lg dark:border-b dark:border-gray-700 dark:bg-gray-900" role="alert">
+    <span class="flex justify-center items-center gap-2 font-bold font-mono text-2xl">
+        Todo App
+    </span>
+</div>  
+{% endblock navbar %}
+
+{% block content %}
+
+<!-- component -->
+<div class="h-100 w-full flex items-center justify-center bg-teal-lightest font-sans rounded-xl">
+	<div class="bg-gray-900 rounded-3xl shadow p-5 m-2 w-full lg:w-3/4 lg:max-w-lg">
+        <!--to print flash messages-->
+        {% with messages = get_flashed_messages(with_categories=true)%}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <p class="flex justify-center mb-2 {% if category == 'error' %} text-red-500 {% else %} text-green-500 {% endif %} text-center bg-black rounded-3xl p-2 border dark:border dark:border-gray-700">{{ message }}</p>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+        <div 
+            hx-get="{{ url_for('create_todo') }}" 
+            hx-trigger="load">
+        </div>
+        <div 
+            id="todos"
+            class="mt-2"
+            hx-get="{{ url_for('todos') }}" 
+            hx-trigger="load">
+        </div>
+    </div>
+</div>
+<!--component-->
+  
+{% endblock content %}
+
+{% block footer %}{% endblock footer %}

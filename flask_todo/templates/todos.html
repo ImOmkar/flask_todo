@@ -1,0 +1,72 @@
+<!--to print flash messages-->
+{% with messages = get_flashed_messages(with_categories=true)%}
+    {% if messages %}
+        {% for category, message in messages %}
+        <div
+            x-cloak
+            x-show="showAlert"
+            x-data="{ showAlert: true }"
+            x-init="setTimeout(() => showAlert = false, 3000)"
+            role="alert" 
+            class="fixed flex justify-center bottom-0 ml-4 mx-auto text-center w-56 bg-gray-900 rounded-3xl shadow p-6 m-4">
+
+            <p class="text-xl text-center {% if category == 'error' %} text-red-500 {% else %} text-green-500 {% endif %} %">
+                {{ message }}
+            </p>
+
+        </div>
+        {% endfor %}
+    {% endif %}
+{% endwith %}
+<div class="space-y-2">
+    {% for todo in todos %}
+    <div class="flex items-center">
+        <p class="w-full text-white line-clamp-1">{{ todo.todo }}</p>
+        <div x-data="{ showQuoteModal: false }"  @keydown.window.escape="showQuoteModal = false">
+            <button @click="showQuoteModal = !showQuoteModal" hx-target="#quotepostModal_{{ todo.id }}" hx-trigger="click" hx-get="{{ url_for('update_todo', id=todo.id) }}" class="bg-black flex-no-shrink p-2 ml-4 mr-2 border border-gray-700 rounded text-white text-green border-green hover:bg-green">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-4 h-4" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+                    <path d="M12 19l7-7 3 3-7 7-3-3z" />
+                    <path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z" />
+                    <path d="M2 2l7.586 7.586" />
+                    <circle cx="11" cy="11" r="2" />
+                </svg>
+            </button>
+            <!--global create quote post modal-->
+            <div
+                x-cloak
+                x-show="showQuoteModal"
+                x-transition.opacity
+                class="fixed inset-0 bg-slate-900/75">
+            </div>
+            <div
+                x-cloak
+                x-show="showQuoteModal"
+                x-transition:enter="transition ease-out duration-300"
+                x-transition:enter-start="translate-y-full"
+                x-transition:enter-end="translate-y-0"
+                x-transition:leave="transition ease-in duration-300"
+                x-transition:leave-start="translate-y-0"
+                x-transition:leave-end="translate-y-full"
+                class="fixed inset-x-0 bottom-0 z-50 md:w-2/6 w-full h-full md:mx-auto md:h-auto bg-black rounded-t-3xl">
+
+                <button @click="showQuoteModal = false" class="w-full p-3 flex justify-center hover:bg-gray-800 rounded-t-3xl">
+                    <hr class="w-8 border-2 text-center rounded-full">
+                </button>
+                <div id="quotepostModal_{{ todo.id }}" class="p-3">
+                </div>
+            </div>
+            <!--global create quote post modal-->
+        </div>
+        <button
+            hx-post="{{ url_for('delete_todo', id=todo.id)}}" 
+            hx-target="#todos"   
+            class="bg-black flex-no-shrink p-2 border border-gray-700 rounded text-red border-red text-white hover:bg-red">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-4 h-4" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+                <polyline points="3 6 5 6 21 6" />
+                <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
+            </svg>
+        </button>
+    </div>   
+
+    {% endfor %}
+</div>

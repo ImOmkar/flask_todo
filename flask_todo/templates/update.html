@@ -1,0 +1,23 @@
+
+<form method="POST" class="mb-2 flex gap-3">
+    <div class="flex-grow">
+        {{ form.hidden_tag() }} 
+        {{ form.todo }}
+    </div>
+    <div>
+        <button
+            hx-post="{{ url_for('update_todo', id=todo.id)}}" 
+            hx-target="#todos"  
+            class="bg-black px-3 py-2 border-2 border-gray-800 focus:border-2 focus:border-gray-400 rounded text-teal hover:text-white hover:bg-teal">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-5 h-5 text-white" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+                <path d="M12 20h9" />
+                <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z" />
+            </svg>
+        </button>
+    </div>
+    {% if form.todo.errors %}
+        {% for error in form.todo.errors %}
+            <p class="text-red-500">{{ error }}</p>
+        {% endfor %}
+    {% endif %}
+</form>

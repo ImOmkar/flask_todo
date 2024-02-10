@@ -1,0 +1,19 @@
+
+<form method="post" class="flex">
+    <div class="flex-grow">
+        {{ form.hidden_tag() }} 
+        {{ form.todo(cols=50) }}
+    </div>
+    <div class="ml-2">
+        <button 
+            hx-post="{{ url_for('create_todo') }}"
+            hx-target="#todos"
+            _="on click wait for htmx:afterOnLoad then put '' into #todo's value"
+            class="bg-black px-3 py-2 border-2 border-gray-800 focus:border-2 focus:border-gray-400  rounded text-teal hover:text-white hover:bg-teal">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-5 h-5 text-white" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+                <line x1="12" x2="12" y1="5" y2="19" />
+                <line x1="5" x2="19" y1="12" y2="12" />
+            </svg>
+        </button>
+    </div>
+</form>
