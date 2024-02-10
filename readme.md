@@ -18,7 +18,7 @@
     ```
 <!-- skip, if you already know. -->
 
->  inside root directory, run python run.py to start the server
+>  inside root directory, run `python run.py` to start the server
 
 
 # project structure
