@@ -1,4 +1,4 @@
-![alt text](https://github.com/ImOmkar/flask_todo/todo.png "flask_todo")
+![alt text](https://github.com/ImOmkar/flask_todo/blob/master/todo.png "flask_todo")
 
 1. create virutal environment'
 2. activate virtual environment
