@@ -1,6 +1,6 @@
 ![alt text](https://github.com/ImOmkar/flask_todo/blob/master/todo.png "flask_todo")
 
-1. create virutal environment'
+1. create virtual environment'
 2. activate virtual environment
 3. go to root directory - flask_todo.
 4. run `pip install -m requirements.txt` to install packages from that txt file.
